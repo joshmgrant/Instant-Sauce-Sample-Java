@@ -19,25 +19,17 @@ public class InstantJavaTestNGTest {
 
     @Test
     public void shouldOpenSafari(Method method) throws MalformedURLException {
-        /*Easy Option For Sauce Authentication:
-         *You can hardcode the values like this example below, but the best practice is to use environment variables
+        /** Here we are reading environment variables from your local machine and storing these
+         * values in the variables below. Doing this is a best practice.
+         *
+         * Not sure how to use env variables, follow this -
+         * https://wiki.saucelabs.com/display/DOCS/Best+Practice%3A+Use+Environment+Variables+for+Authentication+Credentials
          */
         String sauceUserName = System.getenv("SAUCE_USERNAME");
         String sauceAccessKey = System.getenv("SAUCE_ACCESS_KEY");
 
 
-        /* here we are reading environment variables from your local machine and storing these
-         * values in the variables below. Doing this is a best practice.
-         *
-         *  String sauceUserName = System.getenv("SAUCE_USERNAME");
-         *  String sauceAccessKey = System.getenv("SAUCE_ACCESS_KEY");
-         *
-         * Not sure how to use env variables, follow this -
-         * https://wiki.saucelabs.com/display/DOCS/Best+Practice%3A+Use+Environment+Variables+for+Authentication+Credentials
-         */
-
-
-        /*
+        /**
          * In this section, we will configure our test to run on some specific
          * browser/os combination in Sauce Labs
          */
@@ -82,7 +74,7 @@ public class InstantJavaTestNGTest {
     }
 
 
-    /*
+    /**
      *Below we are performing 2 critical actions. Quitting the driver and passing
      * the test result to Sauce Labs user interface.
      */

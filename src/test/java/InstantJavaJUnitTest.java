@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.rules.TestName;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -25,8 +26,11 @@ public class InstantJavaJUnitTest implements SauceOnDemandSessionIdProvider {
     private WebDriver driver;
     private String sessionId;
 
-    /**Easy Option For Sauce Authentication:
-     *You can hardcode the values like this example below, but the best practice is to use environment variables
+    /** Here we are reading environment variables from your local machine and storing these
+     * values in the variables below. Doing this is a best practice.
+     *
+     * Not sure how to use env variables, follow this -
+     * https://wiki.saucelabs.com/display/DOCS/Best+Practice%3A+Use+Environment+Variables+for+Authentication+Credentials
      */
     private String sauceUserName = System.getenv("SAUCE_USERNAME");
     private String sauceAccessKey = System.getenv("SAUCE_ACCESS_KEY");
@@ -60,18 +64,6 @@ public class InstantJavaJUnitTest implements SauceOnDemandSessionIdProvider {
     @Test
     public void shouldOpenSafari() throws MalformedURLException {
 
-
-        /* here we are reading environment variables from your local machine and storing these
-         * values in the variables below. Doing this is a best practice.
-         *
-         *  String sauceUserName = System.getenv("SAUCE_USERNAME");
-         *  String sauceAccessKey = System.getenv("SAUCE_ACCESS_KEY");
-         *
-         * Not sure how to use env variables, follow this -
-         * https://wiki.saucelabs.com/display/DOCS/Best+Practice%3A+Use+Environment+Variables+for+Authentication+Credentials
-         */
-
-
         /*
          * In this section, we will configure our test to run on some specific
          * browser/os combination in Sauce Labs
@@ -100,11 +92,11 @@ public class InstantJavaJUnitTest implements SauceOnDemandSessionIdProvider {
         driver.navigate().to("https://www.saucedemo.com");
         //Create an instance of a Selenium explicit wait so that we can dynamically wait for an element
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        //wait for the user name field to be visible and store that element into a variable
-        By userNameFieldLocator = By.cssSelector("[type='text']");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(userNameFieldLocator));
+        //use the user name field locator as a WebElemet and wait for it to be visible
+        WebElement userNameField = driver.findElement(By.cssSelector("[type='text']"));
+        wait.until(ExpectedConditions.visibilityOf(userNameField));
         //type the user name string into the user name field
-        driver.findElement(userNameFieldLocator).sendKeys("standard_user");
+        userNameField.sendKeys("standard_user");
         //type the password into the password field
         driver.findElement(By.cssSelector("[type='password']")).sendKeys("secret_sauce");
         //hit Login button
