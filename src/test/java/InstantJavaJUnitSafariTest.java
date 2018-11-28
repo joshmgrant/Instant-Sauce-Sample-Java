@@ -17,7 +17,7 @@ import org.testng.Assert;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class InstantJavaJUnitTest implements SauceOnDemandSessionIdProvider {
+public class InstantJavaJUnitSafariTest implements SauceOnDemandSessionIdProvider {
 
     /**
      * Note: this test makes use of Java 1.8 and requires this version of the JRE/JDK.
